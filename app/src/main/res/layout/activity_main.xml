@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="starters.quizthroughxml.MainActivity"
+    android:orientation="vertical"
+    android:background="#e9cece">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:background="#ffffff"
+        android:id="@+id/headerLayout"
+        >
+
+       <TextView
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:layout_weight="1"
+           android:layout_gravity="right"
+           android:text="Questions"
+           android:textColor="#000000"
+           android:textStyle="bold"
+           style="@style/Base.TextAppearance.AppCompat.Small"
+
+           android:id="@+id/tvCateg" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="left"
+            android:id="@+id/tvScore"
+            android:text="Score = "
+            android:textColor="#000000"
+            android:textStyle="bold"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:id="@+id/tvQ"
+            android:text="Large Text"
+            android:textColor="#000000"
+            style="@style/Base.TextAppearance.AppCompat.Large"
+            android:gravity="center"
+            android:background="#ffffff"
+            android:layout_marginBottom="1dp"
+            />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pbar"
+            android:layout_gravity="center"
+            style="?android:attr/progressBarStyle"
+            android:indeterminate="false"
+
+            />
+
+
+    </FrameLayout>
+
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:layout_marginBottom="1dp"
+        android:layout_marginTop="1dp"
+        android:id="@+id/SelectionLayout">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/tvTrue"
+            android:layout_gravity="left"
+            android:text="True"
+            android:textStyle="bold"
+            android:textColor="#2855da"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/tvFalse"
+            android:text="False"
+            android:textColor="#2855da"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="right"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        android:background="#ffffff"
+        android:id="@+id/AnswerLayout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:text="Answer"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/tvCorrect"
+            android:text="Correct"
+            android:textColor="#7cb61b"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:visibility="gone"
+            style="@style/Base.TextAppearance.AppCompat.Large"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/tvInCorrect"
+            android:text="InCorrect"
+            android:textColor="#fe0303"
+            android:textStyle="bold"
+            android:visibility="gone"
+            style="@style/Base.TextAppearance.AppCompat.Large"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:id="@+id/ButtonsLayout">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/btnPrev"
+            android:background="#ffffff"
+            android:text="PREV"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="right"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/btnNext"
+            android:background="#ffffff"
+            android:text="NEXT"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>
