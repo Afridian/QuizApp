@@ -9,8 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/tvViewHolder"
-        android:text=""
-        android:layout_gravity="center"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"/>
 

@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -53,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
     ListClass QList;
     RequestQueue requestQueue;
     FragmentManager fm;
+    FragmentManager ft;
     Category_FragmentDialog CFD;
+    Defficulty_FragmentDialog DFD;
 
 
     public String setUrl(int category, String difficulty) {
@@ -246,7 +249,9 @@ public class MainActivity extends AppCompatActivity {
         Alist = new ArrayList<ListClass>();
 
         fm = getSupportFragmentManager();
+        ft = getSupportFragmentManager();
         CFD = new Category_FragmentDialog();
+        DFD = new Defficulty_FragmentDialog();
 
 
 
@@ -272,6 +277,13 @@ public class MainActivity extends AppCompatActivity {
                 CFD.show(fm, "CATEGORY_TAG");
 
 
+            }
+        });
+
+        tvDeff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DFD.show(ft, "DEFFICULTY_TAG");
             }
         });
 
