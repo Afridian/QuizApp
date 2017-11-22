@@ -3,6 +3,7 @@ package starters.quizthroughxml;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -48,8 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     List<ListClass> Alist;
+
     ListClass QList;
     RequestQueue requestQueue;
+    FragmentManager fm;
+    Category_FragmentDialog CFD;
 
 
     public String setUrl(int category, String difficulty) {
@@ -134,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -218,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -239,9 +245,18 @@ public class MainActivity extends AppCompatActivity {
         tvCateg = (TextView)findViewById(R.id.tvCateg);
         Alist = new ArrayList<ListClass>();
 
+        fm = getSupportFragmentManager();
+        CFD = new Category_FragmentDialog();
+
+
+
+
+
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
 
         callServices(Utils.CATEGORY_COMPUTER, Utils.DIFFICULTY_EASY);
 
@@ -249,6 +264,16 @@ public class MainActivity extends AppCompatActivity {
         btnPrev.setEnabled(false);
 
         tvScore.setText("Score: " + counter);
+
+        tvCateg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                CFD.show(fm, "CATEGORY_TAG");
+
+
+            }
+        });
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
