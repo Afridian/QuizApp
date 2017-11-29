@@ -20,13 +20,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public List<String> Q_Category;
 
     Context context;
-    MainActivity obj;
+    ItemClickListener listener;
 
-    public MyAdapter(Context context, List<String> Q_Category){
+    public MyAdapter(Context context, List<String> Q_Category, ItemClickListener listener){
 
         this.Q_Category = Q_Category;
         this.context = context;
-        this.obj = new MainActivity();
+        this.listener = listener;
 
     }
 
@@ -35,54 +35,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.view_holder_layout,parent,false);
-
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         holder.tvViewHolder.setText(Q_Category.get(position));
-
-        holder.setItemClickListener(new ItemClickListener() {
+        holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view, int position) {
-
-                if (Q_Category.get(position).equalsIgnoreCase("Computer")){
-                   obj.Alist.clear();
-                   obj.tvQ.setVisibility(View.GONE);
-                   obj.callServices(Utils.CATEGORY_COMPUTER, Utils.DIFFICULTY_EASY);
-                   obj.tvQ.setVisibility(View.VISIBLE);
-                   obj.tvCateg.setText("Category: Computer");
-                   obj.tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_EASY);
-                }
-                else if (Q_Category.get(position).equalsIgnoreCase("General Knowledge")){
-                    obj.Alist.clear();
-                    obj.tvQ.setVisibility(View.GONE);
-                    obj.callServices(Utils.CATEGORY_GENERALKNOWLEDGE, Utils.DIFFICULTY_EASY);
-                    obj.tvQ.setVisibility(View.VISIBLE);
-                    obj.tvCateg.setText("Category: General Knowledge");
-                    obj.tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_EASY);
-                }
-                else if (Q_Category.get(position).equalsIgnoreCase("History")){
-                    obj.Alist.clear();
-                   obj.tvQ.setVisibility(View.GONE);
-                    obj.callServices(Utils.CATEGORY_HISTORY, Utils.DIFFICULTY_EASY);
-                    obj.tvQ.setVisibility(View.VISIBLE);
-                    obj.tvCateg.setText("Category: History");
-                    obj.tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_EASY);
-                }
-                else if (Q_Category.get(position).equalsIgnoreCase("Geography")){
-                    obj.Alist.clear();
-                    obj.tvQ.setVisibility(View.GONE);
-                    obj.callServices(Utils.CATEGORY_GEOGRAPHY, Utils.DIFFICULTY_EASY);
-                    obj.tvQ.setVisibility(View.VISIBLE);
-                    obj.tvCateg.setText("Category: Geography");
-                    obj.tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_EASY);
-                }
-
-
-
+            public void onClick(View view) {
+                listener.onClick(Q_Category.get(holder.getLayoutPosition()));
             }
         });
 
@@ -95,31 +58,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvViewHolder;
-        ItemClickListener itemClickListener;
+        View view;
 
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
             tvViewHolder = (TextView) itemView.findViewById(R.id.tvViewHolder);
-            itemView.setOnClickListener(this);
+            view = itemView;
 
         }
 
-        public void setItemClickListener(ItemClickListener itemClickListener ){
-
-            this.itemClickListener = itemClickListener;
-        }
-
-        @Override
-        public void onClick(View view) {
-
-            itemClickListener.onClick(view, getAdapterPosition());
-
-        }
     }
 
 }

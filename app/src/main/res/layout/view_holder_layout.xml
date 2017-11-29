@@ -6,10 +6,14 @@
     android:padding="10dp">
 
     <TextView
+        android:id="@+id/tvViewHolder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/tvViewHolder"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"/>
+        android:paddingRight="10dp"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        />
 
 </LinearLayout>

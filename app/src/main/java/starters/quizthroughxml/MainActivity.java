@@ -1,21 +1,17 @@
 package starters.quizthroughxml;
 
+import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -228,6 +224,66 @@ public class MainActivity extends AppCompatActivity {
     }
 */
 
+public void selection(String selection){
+
+    switch (selection) {
+
+        case "Computer":
+            Alist.clear();
+            tvQ.setVisibility(View.GONE);
+            callServices(Utils.CATEGORY_COMPUTER, Utils.DIFFICULTY_EASY);
+            tvQ.setVisibility(View.VISIBLE);
+            tvCateg.setText("Category: Computer");
+            tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_EASY);
+            break;
+
+        case "General Knowledge":
+            Alist.clear();
+            callServices(Utils.CATEGORY_GENERALKNOWLEDGE, Utils.DIFFICULTY_EASY);
+            tvCateg.setText("Category: General Knowledge");
+            tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_EASY);
+            break;
+
+        case "History":
+            Alist.clear();
+            callServices(Utils.CATEGORY_HISTORY, Utils.DIFFICULTY_EASY);
+            tvCateg.setText("Category: History");
+            tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_EASY);
+            break;
+
+        case "Geography":
+            Alist.clear();
+            callServices(Utils.CATEGORY_GEOGRAPHY, Utils.DIFFICULTY_EASY);
+            tvCateg.setText("Category: Geography");
+            tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_EASY);
+            break;
+
+        case Utils.DIFFICULTY_EASY:
+            Alist.clear();
+            callServices(SELECTED_CATEGORY, Utils.DIFFICULTY_EASY);
+            tvCateg.setText("Category: Computer");
+            tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_EASY);
+            break;
+
+        case Utils.DIFFICULTY_MEDIUM:
+            Alist.clear();
+            callServices(SELECTED_CATEGORY, Utils.DIFFICULTY_MEDIUM);
+            tvCateg.setText("Category: Computer");
+            tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_MEDIUM);
+            break;
+
+
+        case Utils.DIFFICULTY_HARD:
+            Alist.clear();
+            callServices(SELECTED_CATEGORY, Utils.DIFFICULTY_HARD);
+            tvCateg.setText("Category: Computer");
+            tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_HARD);
+            break;
+    }
+
+
+}
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -249,7 +305,6 @@ public class MainActivity extends AppCompatActivity {
         Alist = new ArrayList<ListClass>();
 
         fm = getSupportFragmentManager();
-        ft = getSupportFragmentManager();
         CFD = new Category_FragmentDialog();
         DFD = new Defficulty_FragmentDialog();
 
@@ -283,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
         tvDeff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DFD.show(ft, "DEFFICULTY_TAG");
+                DFD.show(fm, "DEFFICULTY_TAG");
             }
         });
 

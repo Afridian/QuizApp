@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="starters.quizthroughxml.MainActivity"
-    android:orientation="vertical"
-    android:background="#e9cece">
+    android:background="#BFB48F"
+    >
 
     <android.support.v7.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
+        android:background="#374A67">
 
         <TextView
             android:layout_width="match_parent"
@@ -22,75 +22,95 @@
 
             android:id="@+id/tvScore"
             android:text="Score = "
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:textStyle="bold"
             style="@style/Base.TextAppearance.AppCompat.Small"
-            android:gravity="start" />
+            android:gravity="end" />
 
     </android.support.v7.widget.Toolbar>
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.40"
-        android:orientation="horizontal"
-        android:background="#ffffff"
         android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:background="#BFB48F"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+
         >
 
-       <TextView
-           android:layout_width="0dp"
-           android:layout_height="match_parent"
-           android:layout_weight="1"
-           android:layout_gravity="start"
-           android:text="Questions"
-           android:textColor="#000000"
-           android:textStyle="bold"
-           style="@style/Base.TextAppearance.AppCompat.Small"
-           android:id="@+id/tvCateg" />
-
         <TextView
+            android:id="@+id/tvCateg"
             style="@style/Base.TextAppearance.AppCompat.Small"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.36"
-            android:layout_gravity="end"
+            android:layout_weight="1"
+            android:layout_gravity="start"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:background="#ffffff"
+            android:padding="5dp"
+            android:text="Questions"
             android:textColor="#000000"
-            android:textStyle="bold"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/tvDeff"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:padding="5dp"
             android:text="Defficulty: "
-            android:background="#ffffff" />
+            android:textAlignment="textEnd"
+            android:textColor="#000000"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:background="#ffffff">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/headerLayout"
+        android:layout_above="@id/SelectionLayout"
+        android:id="@+id/Q_layout"
+        android:layout_marginBottom="2dp"
+        android:background="#BFB48F"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+      >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:id="@+id/tvQ"
-            android:text="Large Text"
-            android:textColor="#000000"
-            style="@style/Base.TextAppearance.AppCompat.Large"
-            android:gravity="center"
-            android:background="#ffffff"
-            android:layout_marginBottom="1dp"
-            />
         <ProgressBar
+            android:id="@+id/pbar"
+            style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/pbar"
             android:layout_gravity="center"
-            style="?android:attr/progressBarStyle"
             android:indeterminate="false"
 
+            />
+
+        <TextView
+            android:id="@+id/tvQ"
+            style="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:gravity="center"
+            android:text="Large Text"
+            android:textColor="#000000"
             />
 
 
@@ -98,25 +118,31 @@
 
      <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="1"
-        android:background="#ffffff"
-        android:layout_marginBottom="1dp"
-        android:layout_marginTop="1dp"
-        android:id="@+id/SelectionLayout">
+        android:background="#BFB48F"
+         android:paddingStart="10dp"
+         android:paddingEnd="10dp"
+         android:paddingTop="5dp"
+         android:paddingBottom="5dp"
+         android:layout_above="@id/AnswerLayout"
+        android:id="@+id/SelectionLayout"
+        >
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/tvTrue"
-            android:layout_gravity="left"
+            android:layout_gravity="start"
             android:text="True"
             android:textStyle="bold"
             android:textColor="#2855da"
+            android:background="#ffffff"
             android:gravity="center"
-            />
+            android:layout_marginRight="2dp"
+            android:layout_marginEnd="2dp"
+            android:padding="5dp"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -126,20 +152,27 @@
             android:textColor="#2855da"
             android:textStyle="bold"
             android:gravity="center"
-            android:layout_gravity="right"/>
+            android:background="#ffffff"
+            android:layout_gravity="right"
+            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp"
+            android:padding="5dp"/>
 
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:orientation="vertical"
-        android:background="#ffffff"
-        android:id="@+id/AnswerLayout">
+        android:background="#BFB48F"
+        android:id="@+id/AnswerLayout"
+        android:layout_above="@id/ButtonsLayout"
+        >
 
         <TextView
             android:layout_width="match_parent"
@@ -147,8 +180,10 @@
             android:layout_weight="1"
             android:textColor="#000000"
             android:textStyle="bold"
+            android:background="#ffffff"
             style="@style/Base.TextAppearance.AppCompat.Small"
             android:text="Answer"
+
             />
 
         <TextView
@@ -156,10 +191,12 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:id="@+id/tvCorrect"
+            android:background="#ffffff"
             android:text="Correct"
             android:textColor="#7cb61b"
             android:gravity="center"
             android:textStyle="bold"
+            android:padding="30dp"
             android:visibility="gone"
             style="@style/Base.TextAppearance.AppCompat.Large"/>
 
@@ -169,6 +206,7 @@
             android:layout_weight="1"
             android:id="@+id/tvInCorrect"
             android:text="InCorrect"
+            android:background="#ffffff"
             android:textColor="#fe0303"
             android:textStyle="bold"
             android:visibility="gone"
@@ -178,12 +216,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#ffffff"
+        android:layout_height="wrap_content"
+        android:background="#BFB48F"
         android:orientation="horizontal"
-        android:layout_marginTop="1dp"
-        android:id="@+id/ButtonsLayout">
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:id="@+id/ButtonsLayout"
+        android:layout_alignParentBottom="true"
+        >
 
         <Button
             android:layout_width="0dp"
@@ -193,21 +235,28 @@
             android:background="#ffffff"
             android:text="PREV"
             android:textStyle="bold"
+            android:textColor="#000000"
             android:gravity="center"
             android:layout_gravity="right"
+            android:layout_marginRight="2dp"
+            android:layout_marginEnd="2dp"
             />
+
         <Button
+            android:id="@+id/btnNext"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp"
             android:layout_weight="1"
-            android:id="@+id/btnNext"
             android:background="#ffffff"
             android:text="NEXT"
-            android:layout_gravity="center"
+            android:textColor="#000000"
             android:textStyle="bold"
             />
 
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>
