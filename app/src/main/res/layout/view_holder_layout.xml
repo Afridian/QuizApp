@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@color/colorPrimaryDark">
 
     <TextView
         android:id="@+id/tvViewHolder"
@@ -11,9 +12,9 @@
         android:layout_height="match_parent"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:textColor="#000000"
-        android:textSize="18sp"
+        android:paddingTop="5dp"
         android:textAlignment="center"
-        />
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp" />
 
 </LinearLayout>

@@ -5,11 +5,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +57,8 @@ public class Category_FragmentDialog extends DialogFragment{
         rv = (RecyclerView)rootView.findViewById(R.id.CategoryList);
         rv.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         rv.setHasFixedSize(true);
+        rv.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+
         adapter = new MyAdapter(this.getActivity(), Q_Category, new ItemClickListener() {
             @Override
             public void onClick(String Category) {

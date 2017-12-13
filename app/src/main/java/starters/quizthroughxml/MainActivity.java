@@ -1,6 +1,9 @@
 package starters.quizthroughxml;
 
 import android.app.Dialog;
+import android.arch.persistence.room.Room;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,16 +36,15 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     TextView tvQ, tvTrue, tvFalse, tvCorect, tvInCorrect, tvScore, tvDeff, tvCateg;
-    Button btnPrev, btnNext;
+    Button btnPrev, btnNext, btnTrue, btnFalse, btnFinish;
 
     int counter = 0;
     int score = 0;
     ProgressBar pbar;
-    String Q, A;
-    String Q_URL;
+    String Q, A, Q_URL;
 
     int SELECTED_CATEGORY = Utils.CATEGORY_COMPUTER;
-
+    String SELECTED_DIFFICULTY = Utils.DIFFICULTY_EASY;
 
 
     List<ListClass> Alist;
@@ -60,6 +62,26 @@ public class MainActivity extends AppCompatActivity {
         Q_URL = "https://opentdb.com/api.php?amount=10&category=" + category + "&difficulty=" + difficulty + "&type=boolean";
 
         return Q_URL;
+    }
+
+    public String setDifficulty(int category){
+        String CATEGORY = "";
+        switch (category){
+            case Utils.CATEGORY_COMPUTER:
+                CATEGORY = "Computer";
+                break;
+            case Utils.CATEGORY_GENERALKNOWLEDGE:
+                CATEGORY = "General Knowledge";
+                break;
+            case Utils.CATEGORY_HISTORY:
+                CATEGORY = "History";
+                break;
+            case Utils.CATEGORY_GEOGRAPHY:
+                CATEGORY = "Geography";
+                break;
+        }
+
+        return CATEGORY;
     }
 
     public void callServices(int category, String difficulty) {
@@ -99,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                             QList = new ListClass(Q, A);
                             Alist.add(QList);
 
-                            tvQ.setTextColor(Color.BLACK);
+                            tvQ.setTextColor(Color.rgb(241,247,237));
                             tvQ.setText(Alist.get(counter).getQuestions());
 
                         }
@@ -230,54 +252,65 @@ public void selection(String selection){
 
         case "Computer":
             Alist.clear();
+            SELECTED_CATEGORY = Utils.CATEGORY_COMPUTER;
+            SELECTED_DIFFICULTY = Utils.DIFFICULTY_EASY;
             tvQ.setVisibility(View.GONE);
-            callServices(Utils.CATEGORY_COMPUTER, Utils.DIFFICULTY_EASY);
+            callServices(SELECTED_CATEGORY, SELECTED_DIFFICULTY);
             tvQ.setVisibility(View.VISIBLE);
             tvCateg.setText("Category: Computer");
-            tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_EASY);
+            tvDeff.setText("Difficulty: "+ SELECTED_DIFFICULTY);
             break;
 
         case "General Knowledge":
             Alist.clear();
-            callServices(Utils.CATEGORY_GENERALKNOWLEDGE, Utils.DIFFICULTY_EASY);
+            SELECTED_CATEGORY = Utils.CATEGORY_GENERALKNOWLEDGE;
+            SELECTED_DIFFICULTY = Utils.DIFFICULTY_EASY;
+            callServices(SELECTED_CATEGORY, SELECTED_DIFFICULTY);
             tvCateg.setText("Category: General Knowledge");
-            tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_EASY);
+            tvDeff.setText("Difficulty: "+SELECTED_DIFFICULTY);
             break;
 
         case "History":
             Alist.clear();
-            callServices(Utils.CATEGORY_HISTORY, Utils.DIFFICULTY_EASY);
+            SELECTED_CATEGORY = Utils.CATEGORY_HISTORY;
+            SELECTED_DIFFICULTY = Utils.DIFFICULTY_EASY;
+            callServices(SELECTED_CATEGORY, SELECTED_DIFFICULTY);
             tvCateg.setText("Category: History");
-            tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_EASY);
+            tvDeff.setText("Difficulty: "+SELECTED_DIFFICULTY);
             break;
 
         case "Geography":
             Alist.clear();
-            callServices(Utils.CATEGORY_GEOGRAPHY, Utils.DIFFICULTY_EASY);
+            SELECTED_CATEGORY = Utils.CATEGORY_GEOGRAPHY;
+            SELECTED_DIFFICULTY = Utils.DIFFICULTY_EASY;
+            callServices(SELECTED_CATEGORY, SELECTED_DIFFICULTY);
             tvCateg.setText("Category: Geography");
-            tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_EASY);
+            tvDeff.setText("Difficulty: "+SELECTED_DIFFICULTY);
             break;
 
         case Utils.DIFFICULTY_EASY:
             Alist.clear();
-            callServices(SELECTED_CATEGORY, Utils.DIFFICULTY_EASY);
-            tvCateg.setText("Category: Computer");
-            tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_EASY);
+            SELECTED_DIFFICULTY = Utils.DIFFICULTY_EASY;
+                callServices(SELECTED_CATEGORY, SELECTED_DIFFICULTY);
+                tvCateg.setText("Category: "+setDifficulty(SELECTED_CATEGORY));
+                tvDeff.setText("Difficulty: "+SELECTED_DIFFICULTY);
             break;
 
         case Utils.DIFFICULTY_MEDIUM:
             Alist.clear();
-            callServices(SELECTED_CATEGORY, Utils.DIFFICULTY_MEDIUM);
-            tvCateg.setText("Category: Computer");
-            tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_MEDIUM);
+            SELECTED_DIFFICULTY = Utils.DIFFICULTY_MEDIUM;
+                callServices(SELECTED_CATEGORY, SELECTED_DIFFICULTY);
+                tvCateg.setText("Category: "+setDifficulty(SELECTED_CATEGORY));
+                tvDeff.setText("Difficulty: "+SELECTED_DIFFICULTY);
             break;
 
 
         case Utils.DIFFICULTY_HARD:
             Alist.clear();
-            callServices(SELECTED_CATEGORY, Utils.DIFFICULTY_HARD);
-            tvCateg.setText("Category: Computer");
-            tvDeff.setText("Difficulty: "+Utils.DIFFICULTY_HARD);
+            SELECTED_DIFFICULTY = Utils.DIFFICULTY_HARD;
+                callServices(SELECTED_CATEGORY, SELECTED_DIFFICULTY);
+                tvCateg.setText("Category: "+setDifficulty(SELECTED_CATEGORY));
+                tvDeff.setText("Difficulty: "+SELECTED_DIFFICULTY);
             break;
     }
 
@@ -291,13 +324,14 @@ public void selection(String selection){
         setContentView(R.layout.activity_main);
 
         tvQ = (TextView) findViewById(R.id.tvQ);
-        tvTrue = (TextView) findViewById(R.id.tvTrue);
-        tvFalse = (TextView) findViewById(R.id.tvFalse);
+        btnTrue = (Button) findViewById(R.id.btnTrue);
+        btnFalse = (Button) findViewById(R.id.btnFalse);
         tvCorect = (TextView) findViewById(R.id.tvCorrect);
         tvInCorrect = (TextView) findViewById(R.id.tvInCorrect);
         tvScore = (TextView) findViewById(R.id.tvScore);
         btnNext = (Button) findViewById(R.id.btnNext);
-        btnPrev = (Button) findViewById(R.id.btnPrev);
+       // btnPrev = (Button) findViewById(R.id.btnPrev);
+        btnFinish = (Button)findViewById(R.id.btnFinish);
         requestQueue = Volley.newRequestQueue(this);
         pbar = (ProgressBar) findViewById(R.id.pbar);
         tvDeff = (TextView)findViewById(R.id.tvDeff);
@@ -307,12 +341,6 @@ public void selection(String selection){
         fm = getSupportFragmentManager();
         CFD = new Category_FragmentDialog();
         DFD = new Defficulty_FragmentDialog();
-
-
-
-
-
-
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -321,7 +349,7 @@ public void selection(String selection){
         callServices(Utils.CATEGORY_COMPUTER, Utils.DIFFICULTY_EASY);
 
         btnNext.setEnabled(false);
-        btnPrev.setEnabled(false);
+       // btnPrev.setEnabled(false);
 
         tvScore.setText("Score: " + counter);
 
@@ -342,36 +370,15 @@ public void selection(String selection){
             }
         });
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
+
+       /* btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 btnNext.setEnabled(false);
                 btnPrev.setEnabled(false);
-                tvTrue.setEnabled(true);
-                tvFalse.setEnabled(true);
-
-                tvCorect.setText("");
-                tvInCorrect.setText("");
-                counter++;
-                if (counter >= Alist.size()) {
-
-                    counter = 0;
-
-                }
-                tvQ.setText(Alist.get(counter).getQuestions());
-
-            }
-        });
-
-        btnPrev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                btnNext.setEnabled(false);
-                btnPrev.setEnabled(false);
-                tvTrue.setEnabled(true);
-                tvFalse.setEnabled(true);
+                btnTrue.setEnabled(true);
+                btnFalse.setEnabled(true);
 
                 tvCorect.setText("");
                 tvInCorrect.setText("");
@@ -383,16 +390,16 @@ public void selection(String selection){
                 tvQ.setText(Alist.get(counter).getQuestions());
 
             }
-        });
+        });*/
 
-        tvTrue.setOnClickListener(new View.OnClickListener() {
+        btnTrue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 btnNext.setEnabled(true);
-                btnPrev.setEnabled(true);
+               // btnPrev.setEnabled(true);
 
-                String rAnswer = tvTrue.getText().toString();
+                String rAnswer = btnTrue.getText().toString();
                 checkAnswer(rAnswer);
 
                 if (isCorrect(rAnswer)) {
@@ -409,21 +416,21 @@ public void selection(String selection){
                 }
 
 
-                tvTrue.setEnabled(false);
-                tvFalse.setEnabled(false);
+                btnTrue.setEnabled(false);
+                btnFalse.setEnabled(false);
 
 
             }
         });
 
-        tvFalse.setOnClickListener(new View.OnClickListener() {
+        btnFalse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 btnNext.setEnabled(true);
-                btnPrev.setEnabled(true);
+                //btnPrev.setEnabled(true);
 
-                String wAnswer = tvFalse.getText().toString();
+                String wAnswer = btnFalse.getText().toString();
                 checkAnswer(wAnswer);
 
                 if (isCorrect(wAnswer)) {
@@ -439,11 +446,56 @@ public void selection(String selection){
                     tvScore.setText("Score: " + score);
                 }
 
-                tvTrue.setEnabled(false);
-                tvFalse.setEnabled(false);
+                btnTrue.setEnabled(false);
+                btnFalse.setEnabled(false);
 
             }
         });
+
+
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                btnNext.setEnabled(false);
+                //btnPrev.setEnabled(false);
+                btnTrue.setEnabled(true);
+                btnFalse.setEnabled(true);
+
+                tvCorect.setText("");
+                tvInCorrect.setText("");
+                counter++;
+                if (counter >= Alist.size()) {
+
+                   if (counter>=9){
+                        btnNext.setVisibility(View.GONE);
+                        btnFinish.setVisibility(View.VISIBLE);
+                        btnTrue.setEnabled(false);
+                        btnFalse.setEnabled(false);
+
+                    }
+
+                }
+                else {
+                    tvQ.setText(Alist.get(counter).getQuestions());
+                }
+
+            }
+        });
+
+        btnFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, ScoreActivity.class);
+                intent.putExtra("EarnedScore",score);
+                startActivity(intent);
+
+
+            }
+        });
+
 
 
     }
